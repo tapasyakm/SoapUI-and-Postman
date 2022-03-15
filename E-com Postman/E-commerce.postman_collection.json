@@ -1,0 +1,475 @@
+{
+	"info": {
+		"_postman_id": "ac1e805c-8680-489a-9347-73d41253a68f",
+		"name": "E-commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//const request = pm.request.json();\r",
+									"\r",
+									"//var userid = jsonData1.users[6]._id;\r",
+									"\r",
+									"\r",
+									"//pm.environment.set(\"request1\", request);\r",
+									"\r",
+									"//pm.globals.set(\"userid global\", userid);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"email\": \"cfd123@gmail.com\",\r\n\t\"password\": \"krish@2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/user/signup",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"token\",jsonData.accessToken);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"email\": \"{{email}}\",\r\n\t\"password\": \"{{password}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/{{endpoint}}",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"{{endpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData1 = pm.response.json();\r",
+									"\r",
+									"var userid = jsonData1.users[9]._id;\r",
+									"\r",
+									"\r",
+									"//pm.environment.set(\"user_id\", userid);\r",
+									"\r",
+									"pm.globals.set(\"userid global\", userid);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/user",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/user/{{userid global}}",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"user",
+								"{{userid global}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get all products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData2 = pm.response.json();\r",
+									"\r",
+									"var productid = jsonData2.products[8]._id;\r",
+									"\r",
+									"\r",
+									"//pm.environment.set(\"product_id\", productid);\r",
+									"\r",
+									"pm.globals.set(\"productid global\", productid);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/products",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"{{name}}\",\r\n\t\"price\": \"{{price}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/{{endpoints}}",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"{{endpoints}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get product by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/products/{{productid global}}",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"products",
+								"{{productid global}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update product by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"book\",\r\n\t\"price\": 5698\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/products/{{productid global}}",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"products",
+								"{{productid global}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://ecommerceservice.herokuapp.com/products/{{productid global}}",
+							"protocol": "https",
+							"host": [
+								"ecommerceservice",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"products",
+								"{{productid global}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

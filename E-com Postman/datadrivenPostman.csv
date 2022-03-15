@@ -1,0 +1,3 @@
+endpoint,email,password
+user/login,abc123@gmail.com,krish@1
+user/login,cfd123@gmail.com,krish@2
